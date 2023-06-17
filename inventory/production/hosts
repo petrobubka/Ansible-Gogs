@@ -1,0 +1,4 @@
+nfs1 ansible_host=10.26.0.64
+
+[nfs]
+nfs1
