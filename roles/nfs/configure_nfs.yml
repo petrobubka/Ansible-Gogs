@@ -13,7 +13,7 @@
       copy:
         dest: /etc/exports
         content: |
-          /mnt/nfs_shares  10.26.0.0/24(sync, rw, no_root_squash)
+          /mnt/nfs_shares 10.26.0.0/24(rw,sync,no_root_squash)
 
     - name: Execute exportfs command
       become: yes
