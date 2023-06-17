@@ -8,3 +8,21 @@
      file:
        path: /mnt/nfs_shares
        state: directory
+
+   - name: Edit exports
+     copy:
+        dest: /etc/exports
+        content: |
+          /mnt/nfs_shares  10.26.0.0/24(sync, rw, no_root_squash)
+
+   - name: Execute exportfs command
+      become: yes
+      command: sudo exportfs -arv
+
+   - name: Add NFS service to firewall
+      become: yes
+      command: sudo firewall-cmd --permanent --add-service=nfs && sudo firewall-cmd --permanent --add-service=rpc-bind && sudo firewall-cmd --permanent --add-service=mountd && sudo firewall-cmd --reload
+
+   - name: Configure Selinux
+      become: yes
+      command: setsebool -P nfs_export_all_rw 1
