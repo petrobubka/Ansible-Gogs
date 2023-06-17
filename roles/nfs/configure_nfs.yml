@@ -19,10 +19,22 @@
       become: yes
       command: sudo exportfs -arv
 
-    - name: Add NFS service to firewall
+     - name: Add NFS service to firewall
       become: yes
-      command: sudo firewall-cmd --permanent --add-service=nfs && sudo firewall-cmd --permanent --add-service=rpc-bind && sudo firewall-cmd --permanent --add-service=mountd && sudo firewall-cmd --reload
+      command: sudo firewall-cmd --permanent --add-service=nfs
+
+    - name: Add RPC Bind service to firewall
+      become: yes
+      command: sudo firewall-cmd --permanent --add-service=rpc-bind
+
+    - name: Add Mountd service to firewall
+      become: yes
+      command: sudo firewall-cmd --permanent --add-service=mountd
+
+    - name: Reload firewall
+      become: yes
+      command: sudo firewall-cmd --reload
 
     - name: Configure Selinux
       become: yes
-      command: setsebool -P nfs_export_all_rw 1
+      command: sudo setsebool -P nfs_export_all_rw 1
