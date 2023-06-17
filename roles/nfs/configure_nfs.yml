@@ -19,7 +19,7 @@
       become: yes
       command: sudo exportfs -arv
 
-     - name: Add NFS service to firewall
+    - name: Add NFS service to firewall
       become: yes
       command: sudo firewall-cmd --permanent --add-service=nfs
 
