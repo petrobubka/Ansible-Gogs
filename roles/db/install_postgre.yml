@@ -1,5 +1,5 @@
 ---
-- name: Install pos
+- name: Install postgre
   hosts: db
   become: true
   tasks:
