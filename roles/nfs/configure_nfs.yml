@@ -1,0 +1,10 @@
+---
+- name: Configure nfs
+  hosts: nfs
+  become: true
+
+  tasks:
+   - name: Create directory
+     file:
+       path: /mnt/nfs_shares
+       state: directory
