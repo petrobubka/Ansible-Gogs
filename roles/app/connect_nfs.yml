@@ -1,0 +1,15 @@
+---
+- name: Configure nfs
+  hosts: app
+  become: true
+  tasks:
+    - name: Install nfs-utils package
+      dnf:
+        name: nfs-utils
+        state: present
+
+    - name: Install nfs4-acl-tools package
+      dnf:
+        name: nfs4-acl-tools
+        state: present
+    
