@@ -12,4 +12,12 @@
       dnf:
         name: nfs4-acl-tools
         state: present
+
+    - name: Mount NFS share
+      mount:
+        src: "{{nfs1}}:/mnt/nfs_shares"
+        path: /mnt/nfs_share
+        fstype: nfs
+        opts: defaults
+        state: mounted
     
