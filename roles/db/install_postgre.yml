@@ -12,6 +12,11 @@
       ansible.builtin.stat:
         path: "/var/lib/pgsql/data/pg_hba.conf"
       register: postgres_data
+    
+    - name: Install pip
+      dnf:
+        name: python3-pip
+        state: present
 
     - name: Initialize PostgreSQL
       shell: "postgresql-setup initdb"
@@ -24,6 +29,11 @@
         enabled: yes
       with_items:
         - postgresql
+
+    - name: Install psycopg2 Python library
+      dnf:
+        name: python-psycopg2
+        state: present
 
   handlers:
     - name: Restart PostgreSQL
