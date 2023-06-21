@@ -21,6 +21,12 @@
     - name: Unpack Gogs archive
       unarchive:
         src: /tmp/gogs_0.13.0_linux_amd64.zip
-        dest: /mnt/nfs_share/gogs
+        dest: /mnt/nfs_share/
         remote_src: yes
+    - name: Rename directory
+      file:
+        src: /mnt/nfs_share/gogs_0.13.0_linux_amd64
+        dest: /mnt/nfs_share/gogs
+        state: directory
+        recurse: yes
     
