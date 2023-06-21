@@ -1,0 +1,9 @@
+---
+- name: Configure gogs
+  hosts: app
+  become: true
+  tasks:
+    - name: Create directory
+      file:
+        path: /mnt/nfs_share/gogs-repositories
+        state: directory

@@ -1,5 +1,5 @@
 ---
-- name: Connect DB
+- name: Install prerequisite
   hosts: app
   become: true
   tasks:
@@ -7,3 +7,20 @@
       dnf:
         name: postgresql
         state: present
+
+    - name: Install git
+      dnf:
+        name: git
+        state: present
+
+    - name: Download Gogs archive
+      get_url:
+        url: https://dl.gogs.io/0.13.0/gogs_0.13.0_linux_amd64.zip
+        dest: /tmp/gogs_0.13.0_linux_amd64.zip
+
+    - name: Unpack Gogs archive
+      unarchive:
+        src: /tmp/gogs_0.13.0_linux_amd64.zip
+        dest: /mnt/nfs_share/gogs
+        remote_src: yes
+    
