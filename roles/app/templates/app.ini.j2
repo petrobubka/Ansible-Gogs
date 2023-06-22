@@ -4,7 +4,7 @@ RUN_MODE   = prod
 
 [database]
 TYPE     = postgres
-HOST     = {{ hostvars['db11'].ansible_host }}:5432
+HOST     = {{ hostvars['db1'].ansible_host }}:5432
 NAME     = gogsapp
 SCHEMA   = public
 USER     = gogsapp
