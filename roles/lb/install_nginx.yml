@@ -13,7 +13,7 @@
         name: nginx
         state: started
         enabled: yes
-        
+
     - name: Copy NGINX configuration
       template:
         src: nginx.conf.j2
@@ -26,6 +26,9 @@
 
   handlers:
     - name: Reload NGINX
-      command: nginx -t && systemctl reload nginx
+      systemd:
+        name: nginx
+        state: restarted
+        enabled: yes
     
 
