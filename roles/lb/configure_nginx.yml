@@ -1,0 +1,20 @@
+---
+- name: Copy NGINX configuration
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - Reload NGINX
+
+handlers:
+- name: Reload NGINX
+  systemd:
+    name: nginx
+    state: restarted
+    enabled: yes
+    
+    
+

@@ -1,0 +1,12 @@
+- name: Main playbook for load balancer
+  hosts: lb
+  become: true
+  tasks:
+    - name: Importing tasks - install_nginx
+      import_tasks: install_nginx.yml
+
+    - name: Importing tasks - install_prerequisite.yml
+      import_tasks: configure_nginx.yml
+
+
+
