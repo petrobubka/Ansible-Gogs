@@ -7,7 +7,7 @@
     group: root
     mode: 0644
   notify:
-    notify: handlers/main.yml
+    notify: lb/handlers/Reload NGINX
 
 
     
