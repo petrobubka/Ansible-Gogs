@@ -7,6 +7,10 @@
       template:
         src: gogs.service.j2
         dest: /etc/systemd/system/gogs.service
+        
+    - name: Disable SELinux enforcement
+      command: setenforce 0
+      changed_when: false
 
     - name: Reload systemd
       systemd:
