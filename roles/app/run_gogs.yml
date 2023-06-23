@@ -18,3 +18,17 @@
     name: gogs
     state: started
     enabled: yes
+
+- name: Open port 3000
+  firewalld:
+    port: 3000/tcp
+    permanent: yes
+    immediate: yes
+    state: enabled
+
+- name: Set httpd_can_network_connect SELinux boolean
+  become: true
+  seboolean:
+    name: httpd_can_network_connect
+    value: yes
+    persistent: yes
