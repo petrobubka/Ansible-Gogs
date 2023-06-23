@@ -10,11 +10,6 @@
     path: /mnt/nfs_share/data
     state: directory
 
-- name: Create directory
-  file:
-    path: /mnt/nfs_share/gogs-repositories
-    state: directory
-
 - name: Create custom/conf directory
   file:
     path: /opt/gogs/custom/conf
