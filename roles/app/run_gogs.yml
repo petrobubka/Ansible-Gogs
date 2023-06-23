@@ -32,3 +32,4 @@
     name: httpd_can_network_connect
     value: yes
     persistent: yes
+    state: yes
