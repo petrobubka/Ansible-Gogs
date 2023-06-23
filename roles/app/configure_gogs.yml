@@ -10,10 +10,12 @@
 
     - name: Create custom/conf directory
       file:
-        path: /root/gogs/custom/conf
+        path: /opt/gogs/custom/conf
         state: directory
         
     - name: Render app.ini template
       template:
         src: app.ini.j2
         dest: /root/gogs/custom/conf/app.ini
+
+      
