@@ -36,9 +36,10 @@ http {
     include /etc/nginx/conf.d/*.conf;
 
 upstream gogs_backend {
-      {% for host in groups['app'] %}
-      server {{ hostvars[host].ansible_host }}:3000;
-      {% endfor %}
+    ip_hash;
+    {% for host in groups['app'] %}
+    server {{ hostvars[host].ansible_host }}:3000;
+    {% endfor %}
   }
 
   server {
