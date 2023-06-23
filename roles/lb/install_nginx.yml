@@ -1,34 +1,14 @@
 ---
-- name: Install nginx
-  hosts: lb
-  become: true
-  tasks:
-    - name: Install NGINX
-      dnf:
-        name: nginx
-        state: present
+- name: Install NGINX
+  dnf:
+    name: nginx
+    state: present
 
-    - name: Start NGINX service
-      systemd:
-        name: nginx
-        state: started
-        enabled: yes
+- name: Start NGINX service
+  systemd:
+    name: nginx
+    state: started
+    enabled: yes
 
-    - name: Copy NGINX configuration
-      template:
-        src: nginx.conf.j2
-        dest: /etc/nginx/nginx.conf
-        owner: root
-        group: root
-        mode: 0644
-      notify:
-        - Reload NGINX
 
-  handlers:
-    - name: Reload NGINX
-      systemd:
-        name: nginx
-        state: restarted
-        enabled: yes
-    
 
