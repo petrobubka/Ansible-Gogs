@@ -8,6 +8,12 @@
         name: nginx
         state: present
 
+    - name: Start NGINX service
+      systemd:
+        name: nginx
+        state: started
+        enabled: yes
+        
     - name: Copy NGINX configuration
       template:
         src: nginx.conf.j2
