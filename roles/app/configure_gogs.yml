@@ -13,6 +13,6 @@
 - name: Render app.ini template
   template:
     src: app.ini.j2
-    dest: /root/gogs/custom/conf/app.ini
+    dest: /opt/gogs/custom/conf/app.ini
 
       
