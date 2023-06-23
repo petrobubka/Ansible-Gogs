@@ -7,7 +7,7 @@
     group: root
     mode: 0644
   notify:
-    - handlers/Reload NGINX
+    - Reload NGINX
 
 
     
