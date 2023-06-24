@@ -1,3 +1,4 @@
+---
 - name: Main playbook for load balancer
   hosts: lb
   become: true
@@ -8,5 +9,9 @@
     - name: Importing tasks - install_prerequisite.yml
       import_tasks: configure_nginx.yml
 
-
-
+handlers:
+  - name: Reload NGINX
+    systemd:
+      name: nginx
+      state: restarted
+      enabled: yes
