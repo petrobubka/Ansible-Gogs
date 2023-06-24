@@ -4,6 +4,6 @@
   become: yes
   roles:
     - lb
-    
+
   handlers:
-    - include: handlers/handlers_lb.yml
+    - include: roles/lb/handlers/handlers_lb.yml
