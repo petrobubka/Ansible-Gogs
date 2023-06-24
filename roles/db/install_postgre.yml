@@ -1,43 +1,32 @@
 ---
-- name: Install postgre
-  hosts: db
-  become: true
-  tasks:
-    - name: Install postgresql-server package
-      dnf:
-        name: postgresql-server
-        state: present
+- name: Install postgresql-server package
+  dnf:
+    name: postgresql-server
+    state: present
 
-    - name: Find out if PostgreSQL is initialized
-      ansible.builtin.stat:
-        path: "/var/lib/pgsql/data/pg_hba.conf"
-      register: postgres_data
-    
-    - name: Install pip
-      dnf:
-        name: python3-pip
-        state: present
+- name: Find out if PostgreSQL is initialized
+  ansible.builtin.stat:
+    path: "/var/lib/pgsql/data/pg_hba.conf"
+  register: postgres_data
 
-    - name: Initialize PostgreSQL
-      shell: "postgresql-setup initdb"
-      when: not postgres_data.stat.exists
+- name: Install pip
+  dnf:
+    name: python3-pip
+    state: present
 
-    - name: Start and enable services
-      service:
-        name: "{{ item }}"
-        state: started
-        enabled: yes
-      with_items:
-        - postgresql
+- name: Initialize PostgreSQL
+  shell: "postgresql-setup initdb"
+  when: not postgres_data.stat.exists
 
-    - name: Install psycopg2 Python library
-      dnf:
-        name: python-psycopg2
-        state: present
+- name: Start and enable services
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  with_items:
+    - postgresql
 
-  handlers:
-    - name: Restart PostgreSQL
-      service:
-        name: postgresql
-        state: restarted
-
+- name: Install psycopg2 Python library
+  dnf:
+    name: python-psycopg2
+    state: present

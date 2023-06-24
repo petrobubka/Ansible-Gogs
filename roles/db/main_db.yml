@@ -1,0 +1,17 @@
+---
+- name: Main playbook for postgresql database
+  hosts: db
+  become: true
+  tasks:
+    - name: Importing tasks - install_postgre.yml
+      import_tasks: install_postgre.yml
+
+    - name: Importing tasks - configure_postgre.yml
+      import_tasks: configure_postgre.yml
+
+    - name: Importing tasks - create_database.yml
+      import_tasks: create_database.yml
+
+
+  handlers:
+    - include: handlers/handlers_db.yml
