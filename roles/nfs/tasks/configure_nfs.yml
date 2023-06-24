@@ -11,25 +11,39 @@
       /mnt/nfs_shares 10.26.0.0/24(rw,sync,no_root_squash)
 
 - name: Execute exportfs command
-  become: yes
-  command: sudo exportfs -arv
+  become: true
+  command:
+    cmd: sudo exportfs -arv
 
 - name: Add NFS service to firewall
-  become: yes
-  command: sudo firewall-cmd --permanent --add-service=nfs
+  become: true
+  firewalld:
+    service: nfs
+    permanent: true
+    state: enabled
 
 - name: Add RPC Bind service to firewall
-  become: yes
-  command: sudo firewall-cmd --permanent --add-service=rpc-bind
+  become: true
+  firewalld:
+    service: rpc-bind
+    permanent: true
+    state: enabled
 
 - name: Add Mountd service to firewall
-  become: yes
-  command: sudo firewall-cmd --permanent --add-service=mountd
+  become: true
+  firewalld:
+    service: mountd
+    permanent: true
+    state: enabled
 
 - name: Reload firewall
-  become: yes
-  command: sudo firewall-cmd --reload
+  become: true
+  firewalld:
+    state: reloaded
 
 - name: Configure Selinux
-  become: yes
-  command: sudo setsebool -P nfs_export_all_rw 1
+  become: true
+  seboolean:
+    name: nfs_export_all_rw
+    value: 1
+    persistent: yes
