@@ -4,7 +4,7 @@
   become: true
   tasks:
     - name: Importing tasks - install_nfs_utils.yml
-      import_tasks: iinstall_nfs_utils.yml
+      import_tasks: install_nfs_utils.yml
 
     - name: Importing tasks - configure_nginx.yml
       import_tasks: configure_nfs.yml
