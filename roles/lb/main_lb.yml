@@ -3,11 +3,11 @@
   hosts: lb
   become: true
   tasks:
-    - name: Importing tasks - install_nginx
+    - name: Importing tasks - install_nginx.yml
       import_tasks: install_nginx.yml
 
-    - name: Importing tasks - install_prerequisite.yml
+    - name: Importing tasks - configure_nginx.yml
       import_tasks: configure_nginx.yml
 
   handlers:
-    - include: handlers/main.yml
+    - include: handlers/handlers_lb.yml

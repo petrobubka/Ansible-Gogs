@@ -1,40 +1,35 @@
 ---
-- name: Configure nfs
-  hosts: nfs
-  become: true
+- name: Create directory
+  file:
+    path: /mnt/nfs_shares
+    state: directory
 
-  tasks:
-    - name: Create directory
-      file:
-        path: /mnt/nfs_shares
-        state: directory
+- name: Edit exports
+  copy:
+    dest: /etc/exports
+    content: |
+      /mnt/nfs_shares 10.26.0.0/24(rw,sync,no_root_squash)
 
-    - name: Edit exports
-      copy:
-        dest: /etc/exports
-        content: |
-          /mnt/nfs_shares 10.26.0.0/24(rw,sync,no_root_squash)
+- name: Execute exportfs command
+  become: yes
+  command: sudo exportfs -arv
 
-    - name: Execute exportfs command
-      become: yes
-      command: sudo exportfs -arv
+- name: Add NFS service to firewall
+  become: yes
+  command: sudo firewall-cmd --permanent --add-service=nfs
 
-    - name: Add NFS service to firewall
-      become: yes
-      command: sudo firewall-cmd --permanent --add-service=nfs
+- name: Add RPC Bind service to firewall
+  become: yes
+  command: sudo firewall-cmd --permanent --add-service=rpc-bind
 
-    - name: Add RPC Bind service to firewall
-      become: yes
-      command: sudo firewall-cmd --permanent --add-service=rpc-bind
+- name: Add Mountd service to firewall
+  become: yes
+  command: sudo firewall-cmd --permanent --add-service=mountd
 
-    - name: Add Mountd service to firewall
-      become: yes
-      command: sudo firewall-cmd --permanent --add-service=mountd
+- name: Reload firewall
+  become: yes
+  command: sudo firewall-cmd --reload
 
-    - name: Reload firewall
-      become: yes
-      command: sudo firewall-cmd --reload
-
-    - name: Configure Selinux
-      become: yes
-      command: sudo setsebool -P nfs_export_all_rw 1
+- name: Configure Selinux
+  become: yes
+  command: sudo setsebool -P nfs_export_all_rw 1
