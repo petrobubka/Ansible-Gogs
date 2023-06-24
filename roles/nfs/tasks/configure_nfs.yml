@@ -38,8 +38,9 @@
 
 - name: Reload firewall
   become: true
-  firewalld:
-    state: reloaded
+  systemd:
+    name: firewalld
+    state: restarted
 
 - name: Configure Selinux
   become: true
