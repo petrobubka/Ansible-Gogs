@@ -43,9 +43,5 @@
     state: restarted
 
 - name: Configure Selinux
-  become: true
-  seboolean:
-    name: nfs_export_all_rw
-    set: true
-    state: yes
-    persistent: true
+  become: yes
+  command: sudo setsebool -P nfs_export_all_rw 1
