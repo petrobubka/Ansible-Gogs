@@ -46,6 +46,6 @@
   become: true
   seboolean:
     name: nfs_export_all_rw
-    value: 1
+    set: true
     state: yes
     persistent: true
