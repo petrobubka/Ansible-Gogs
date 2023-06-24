@@ -6,10 +6,7 @@
     owner: root
     group: root
     mode: 0644
-  notify:
-    notify: roles/lb/handlers/main.yml/Reload NGINX
+  notify: Reload NGINX
 
-
-    
-    
-
+handlers_include:
+  - handlers/main.yml
