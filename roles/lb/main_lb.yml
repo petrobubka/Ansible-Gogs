@@ -10,8 +10,4 @@
       import_tasks: configure_nginx.yml
 
   handlers:
-    - name: Reload NGINX
-      systemd:
-        name: nginx
-        state: restarted
-        enabled: yes
+    - include: handlers/main.yml
