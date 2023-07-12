@@ -7,3 +7,10 @@
     group: root
     mode: 0644
   notify: Reload NGINX
+  
+- name: Set httpd_can_network_connect SELinux boolean
+  become: true
+  seboolean:
+    name: httpd_can_network_connect
+    persistent: yes
+    state: yes
