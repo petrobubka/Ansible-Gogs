@@ -1,6 +1,6 @@
 nfs1 ansible_host=10.26.0.51
 db1 ansible_host=10.26.0.175
-lb1 ansible_host=10.26.0.200
+lb1 ansible_host=10.26.0.37
 appgogs_1 ansible_host=10.26.0.33
 appgogs_2 ansible_host=10.26.0.34
 
